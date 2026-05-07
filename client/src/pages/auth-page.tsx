@@ -17,6 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import pskShield from "@/assets/psk-shield.png";
+import pskGraduates from "@/assets/psk-graduates.jpg";
 
 const CARDINAL = "#B71234";
 const CARDINAL_DARK = "#8B0E27";
@@ -292,19 +293,18 @@ export default function AuthPage() {
               </div>
             </div>
 
-            {/* Hero shield card */}
+            {/* Hero photo card */}
             <div className="flex justify-center items-center">
               <div className="relative w-full max-w-md">
                 <div className="rounded-2xl overflow-hidden flex items-center justify-center"
                   style={{
-                    background: `linear-gradient(135deg, ${CARDINAL} 0%, ${CARDINAL_DARK} 100%)`,
+                    background: CARDINAL,
                     border: "6px solid white",
                     boxShadow: "0 20px 60px rgba(0,0,0,0.20)",
                     aspectRatio: "1 / 1",
-                    padding: 48,
                     transform: "rotate(-0.6deg) scale(1.025)",
                   }}>
-                  <img src={pskShield} alt="Phi Sigma Kappa Fraternity Shield" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 6px 24px rgba(0,0,0,0.25))" }} />
+                  <img src={pskGraduates} alt="Phi Sigma Kappa Brothers at graduation" className="w-full h-full object-cover" style={{ objectPosition: "center" }} />
                 </div>
               </div>
             </div>
