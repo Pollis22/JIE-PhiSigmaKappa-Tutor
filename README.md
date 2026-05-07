@@ -33,6 +33,33 @@ Configure these in `.env` (see `.env.example` for the canonical list):
 
 Refer to `.env.example` for the full list. Do not commit secrets.
 
+### ⚠ Placeholder domain in source
+
+After the polish commits (`efac7c5`, `c08b1cb`), every hardcoded fallback that previously read `stateuniversity-tutor.ai` was replaced with **`phisig-tutor.ai`**, which is a placeholder — no DNS exists for it yet. Real production values come from environment variables, which override every fallback in source. Set these on the Railway service before exposing the app to Brothers:
+
+- `APP_URL` — full https origin (e.g. `https://tutor.phisigmakappa.org`)
+- `ADMIN_EMAIL` — admin notifications, customer-support replies, contact form
+- `ADMIN_ALERT_EMAIL` — safety incident alerts (overrides `ADMIN_EMAIL` for those)
+- `JIE_LEAD_NOTIFY_EMAIL` — new-lead notifications
+- `JIE_SUPPORT_EMAIL` — safety-team copies (typically same as `ADMIN_EMAIL`)
+- `RESEND_FROM_EMAIL` — verified `noreply@…` from a Resend-verified domain
+- `SESSION_COOKIE_DOMAIN` — only set if cross-subdomain cookies are needed (e.g. `.phisigmakappa.org`)
+
+If those are unset, the app will *function* but outbound emails will reference the placeholder domain.
+
+## Post-Fork Polish (commits `efac7c5` and `c08b1cb`)
+
+These commits removed UW/JIE/State branding leaks the initial fork did not catch. If forking THIS repo into another fraternity build, expect to make analogous changes:
+
+**Round 1 (`efac7c5`)** — client surfaces: HeroBanner constants/headlines, SessionFeedback colors, Support FAQ, account-export filename, navigation/contact/srm/live-support/best-practices/features-benefits/LiveChatWidget/admin-layout fonts, full rewrite of `about-lsis.tsx` from "JIE / 4th-grader Emma / fractions" to "the Cardinal Tutor / Brother Sam, Pi Chapter junior / integration by parts."
+
+**Round 2 (`c08b1cb`)** — server-side outbound surfaces (emails, error toasts, policy pages): admin-email subject lines (`PHI SIGMA KAPPA TUTOR …`), password-reset footer, security-routes contact strings, privacy/terms/contact/trust-safety/schools/subscribe/offer/admin-setup pages, `use-auth.tsx` server-error message, safety-detection blocklist pattern, study-guide download filename, plus all server-side `stateuniversity-tutor.ai` fallback addresses → `phisig-tutor.ai`.
+
+## Known Cosmetic Debt
+
+- **Slideshow imagery**: the 8 `client/src/assets/campus/*.png` files were overwritten with the PSK shield (filenames preserved to avoid breaking ~30 imports across the codebase). The HeroBanner slideshow will visually repeat the same shield 8 times until real brotherhood/study photos are dropped in at the existing filenames. No code change needed once new assets exist.
+- **AI tutor identity**: `server/prompts/tutorMind.ts` still introduces the AI as `TutorMind`. The marketing surface calls it "the Cardinal Tutor." This is intentional — `tutorMind.ts` is shared with upstream JIE platforms and renaming would diverge the prompt. The tutor doesn't actually announce its name in normal conversation, so the mismatch is invisible at runtime.
+
 ## Branding Notes
 
 The rebrand replaces all University of Wisconsin (UW–Madison, Bucky, Badger) marks with Phi Sigma Kappa identity. Files changed in this rebrand:
