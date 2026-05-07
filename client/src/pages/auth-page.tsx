@@ -382,6 +382,57 @@ export default function AuthPage() {
         </div>
       </section>
 
+      {/* BROTHERHOOD KNOWLEDGE — featured */}
+      <section className="py-16 md:py-24 px-4 md:px-12" style={{ background: `linear-gradient(135deg, ${CARDINAL} 0%, ${CARDINAL_DARK} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none flex items-center justify-end pr-8 md:pr-16">
+          <img src={pskShield} alt="" className="w-1/2 md:w-1/3 h-auto" />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <span style={{ display: "inline-block", padding: "6px 16px", fontSize: 11, fontWeight: 700, color: "white", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.45)", borderRadius: 999, textTransform: "uppercase", letterSpacing: 2.5, marginBottom: 18 }}>
+              New · Brotherhood Knowledge
+            </span>
+            <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(30px, 4.5vw, 48px)", fontWeight: 700, color: "white", lineHeight: 1.1, marginBottom: 18, letterSpacing: -0.3 }}>
+              Your Tutor Knows the Brotherhood
+            </h2>
+            <p style={{ fontSize: 17, color: "rgba(255,255,255,0.92)", maxWidth: 720, margin: "0 auto", lineHeight: 1.7 }}>
+              The Cardinal Tutor is built with Phi Sig in its bones. The Cardinal Principles, the founders, the motto, the public history — the canon of the Fraternity is part of every conversation, ready when a Brother needs it.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+            <div className="rounded-2xl p-8" style={{ background: "rgba(255,255,255,0.97)", borderTop: `4px solid ${CARDINAL_DARK}` }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: CARDINAL, textTransform: "uppercase", letterSpacing: 2.5, marginBottom: 14 }}>
+                For New Associate Members
+              </p>
+              <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 700, color: CHARCOAL, marginBottom: 14, lineHeight: 1.25 }}>
+                A patient guide through pledge education.
+              </h3>
+              <p style={{ fontSize: 15, lineHeight: 1.75, color: CHARCOAL }}>
+                Drill the Cardinal Principles. Learn the founders by heart. Understand what March 15, 1873 means and why it still matters. The tutor walks you through Phi Sig's public heritage at your pace — day or night, without burning your Big Brother's time. By the time you're ready for initiation, you'll know the Brotherhood the way you should.
+              </p>
+            </div>
+
+            <div className="rounded-2xl p-8" style={{ background: "rgba(255,255,255,0.97)", borderTop: `4px solid ${CARDINAL_DARK}` }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: CARDINAL, textTransform: "uppercase", letterSpacing: 2.5, marginBottom: 14 }}>
+                For Existing Brothers
+              </p>
+              <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 700, color: CHARCOAL, marginBottom: 14, lineHeight: 1.25 }}>
+                A study partner who speaks Phi Sig.
+              </h3>
+              <p style={{ fontSize: 15, lineHeight: 1.75, color: CHARCOAL }}>
+                Whether you're prepping for an officer position, helping a younger Brother with the founders, or just wrestling with thermodynamics at midnight — the tutor speaks the language of the Brotherhood. The framing, vocabulary, and values you'd expect from someone who actually knows the Fraternity.
+              </p>
+            </div>
+          </div>
+
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.78)", textAlign: "center", marginTop: 36, fontStyle: "italic", maxWidth: 620, marginLeft: "auto", marginRight: "auto", lineHeight: 1.6 }}>
+            Confidential ritual content remains where it belongs — with the Brotherhood. The tutor handles only what is publicly known and on the record.
+          </p>
+        </div>
+      </section>
+
       {/* TESTIMONIALS */}
       <section className="py-16 md:py-24 px-4 md:px-12" style={{ background: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">

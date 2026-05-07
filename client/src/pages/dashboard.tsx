@@ -313,6 +313,42 @@ export default function DashboardPage() {
                   </CardContent>
                 </Card>
 
+                {/* Brotherhood Knowledge — featured */}
+                <Card className="border-primary/40 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent shadow-md">
+                  <CardHeader>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Badge className="bg-primary text-primary-foreground hover:bg-primary uppercase tracking-wider text-[10px]">New</Badge>
+                      <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-primary">Brotherhood Knowledge</span>
+                    </div>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <Shield className="h-5 w-5 text-primary" />
+                      Your Tutor Knows the Brotherhood
+                    </CardTitle>
+                    <CardDescription className="text-base leading-relaxed pt-1">
+                      The Cardinal Principles, the founders, the motto, the public history — Phi Sig's canon is now part of every Cardinal Tutor session.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-2 gap-4 mb-4">
+                      <div className="rounded-lg p-4 bg-background/70 border border-primary/15">
+                        <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-primary mb-2">For New Associate Members</p>
+                        <p className="text-sm leading-relaxed text-foreground">
+                          Drill the Cardinal Principles. Learn the founders. Walk through 1873 and what it still means. The tutor coaches your pledge education at your pace, day or night — so you arrive at initiation knowing the Brotherhood the way you should.
+                        </p>
+                      </div>
+                      <div className="rounded-lg p-4 bg-background/70 border border-primary/15">
+                        <p className="text-[10px] font-bold tracking-[0.18em] uppercase text-primary mb-2">For Existing Brothers</p>
+                        <p className="text-sm leading-relaxed text-foreground">
+                          A study partner who speaks Phi Sig. Prep for an officer position, drill a younger Brother on the founders, or wrestle with thermodynamics at midnight — same tutor, framed in the language and values of the Fraternity.
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs italic text-muted-foreground leading-relaxed">
+                      Confidential ritual content remains where it belongs — with the Brotherhood. The tutor handles only what is publicly known and on the record.
+                    </p>
+                  </CardContent>
+                </Card>
+
                 {/* Practice Lessons Quick Action */}
                 <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-primary/10">
                   <CardHeader>
