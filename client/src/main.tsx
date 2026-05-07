@@ -1,0 +1,15 @@
+/**
+ * Phi Sigma Kappa AI Tutor Platform
+ * Copyright (c) 2026 Phi Sigma Kappa Fraternity. Powered by JIE Mastery.ai.
+ * All Rights Reserved.
+ * 
+ * This source code is confidential and proprietary.
+ * Unauthorized copying, modification, or distribution is strictly prohibited.
+ */
+
+
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+createRoot(document.getElementById("root")!).render(<App />);

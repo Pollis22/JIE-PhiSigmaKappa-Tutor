@@ -1,0 +1,427 @@
+/**
+ * Phi Sigma Kappa AI Tutor Platform
+ * Copyright (c) 2026 Phi Sigma Kappa Fraternity. Powered by JIE Mastery.ai.
+ * All Rights Reserved.
+ * 
+ * This source code is confidential and proprietary.
+ * Unauthorized copying, modification, or distribution is strictly prohibited.
+ */
+
+
+import { createClient, LiveTranscriptionEvents, type DeepgramClient } from "@deepgram/sdk";
+
+// Lazy initialization - only create client when actually needed
+let deepgram: DeepgramClient | null = null;
+
+function getDeepgramClient(): DeepgramClient {
+  if (!deepgram) {
+    // Validate API key exists
+    if (!process.env.DEEPGRAM_API_KEY) {
+      console.error("[Deepgram] ❌ DEEPGRAM_API_KEY not found in environment variables");
+      console.error("[Deepgram] ❌ Available env vars:", Object.keys(process.env).filter(k => k.includes('DEEPGRAM')));
+      throw new Error("Missing DEEPGRAM_API_KEY environment variable");
+    }
+
+    // Log API key status (partial for security)
+    console.log("[Deepgram] ✅ API key found:", 
+      process.env.DEEPGRAM_API_KEY.substring(0, 15) + "..."
+    );
+
+    // Initialize Deepgram client with explicit API key
+    deepgram = createClient(process.env.DEEPGRAM_API_KEY);
+    console.log("[Deepgram] ✅ Client initialized");
+  }
+  return deepgram;
+}
+
+export interface DeepgramConnection {
+  send: (audioData: Buffer) => void;
+  close: () => void;
+  keepAliveInterval?: NodeJS.Timeout; // Track the keepAlive interval for cleanup
+}
+
+/**
+ * Map our app language codes to Deepgram-supported language codes.
+ * Uses exact format that Deepgram expects for Nova-2 model.
+ * For unsupported languages, falls back to English STT.
+ */
+const DEEPGRAM_LANGUAGE_MAP: Record<string, string> = {
+  en: 'en-US',     // English (US)
+  es: 'es',        // Spanish
+  fr: 'fr',        // French
+  de: 'de',        // German
+  it: 'it',        // Italian
+  pt: 'pt-BR',     // Portuguese (Brazil)
+  nl: 'nl',        // Dutch
+  ja: 'ja',        // Japanese
+  ko: 'ko',        // Korean
+  zh: 'zh-CN',     // Chinese (Mandarin)
+  ru: 'ru',        // Russian
+  pl: 'pl',        // Polish
+  tr: 'tr',        // Turkish
+  hi: 'hi',        // Hindi
+  id: 'id',        // Indonesian
+  sv: 'sv',        // Swedish
+  da: 'da',        // Danish
+  no: 'no',        // Norwegian
+  fi: 'fi',        // Finnish
+  uk: 'uk',        // Ukrainian
+  cs: 'cs',        // Czech
+  el: 'el',        // Greek
+  hu: 'hu',        // Hungarian
+  ro: 'ro',        // Romanian
+  // Languages NOT in this map (sw, ar, th, vi, yo, ha) will fall back to English
+};
+
+export function getDeepgramLanguageCode(lang: string): string {
+  const mapped = DEEPGRAM_LANGUAGE_MAP[lang];
+  if (!mapped) {
+    console.log(`[Deepgram] ⚠️ Language '${lang}' not supported by Deepgram, using en-US for STT`);
+    return 'en-US';
+  }
+  console.log(`[Deepgram] Using language: ${mapped} (from ${lang})`);
+  return mapped;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// DEEPGRAM ENDPOINTING PROFILES PER GRADE BAND
+// These control when speech_final fires (silence after speech).
+// Nova-3 handles single words natively, so we tune for patience.
+// ChatGPT analysis: once speech_final is properly wired, these
+// values control the ACTUAL turn detection, not is_final.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const DEEPGRAM_ENDPOINTING: Record<string, { endpointing: number; utterance_end_ms: number }> = {
+  'K-2':           { endpointing: 4000, utterance_end_ms: 6000 },  // Young kids pause a lot between words
+  'Elementary':    { endpointing: 3500, utterance_end_ms: 5000 },  // Moderate patience
+  'Middle School': { endpointing: 3000, utterance_end_ms: 4500 },  // Standard
+  'High School':   { endpointing: 2500, utterance_end_ms: 4000 },  // Teens speak more fluidly
+  'College/Adult': { endpointing: 2500, utterance_end_ms: 4000 },  // Fastest natural pace
+};
+
+const DEFAULT_ENDPOINTING = { endpointing: 2500, utterance_end_ms: 4000 };
+
+function getDeepgramEndpointing(ageGroup?: string) {
+  if (!ageGroup) return DEFAULT_ENDPOINTING;
+  const profile = DEEPGRAM_ENDPOINTING[ageGroup];
+  if (profile) return profile;
+  // Fuzzy match for variations
+  const lower = ageGroup.toLowerCase();
+  if (lower.includes('k-2') || lower.includes('k2')) return DEEPGRAM_ENDPOINTING['K-2'];
+  if (lower.includes('elem')) return DEEPGRAM_ENDPOINTING['Elementary'];
+  if (lower.includes('middle')) return DEEPGRAM_ENDPOINTING['Middle School'];
+  if (lower.includes('high')) return DEEPGRAM_ENDPOINTING['High School'];
+  if (lower.includes('college') || lower.includes('adult')) return DEEPGRAM_ENDPOINTING['College/Adult'];
+  return DEFAULT_ENDPOINTING;
+}
+
+export async function startDeepgramStream(
+  onTranscript: (text: string, isFinal: boolean, speechFinal: boolean, detectedLanguage?: string) => void,
+  onError: (error: Error) => void,
+  onClose?: () => void,
+  language: string = "en-US",
+  ageGroup?: string,
+  onUtteranceEnd?: () => void
+): Promise<DeepgramConnection> {
+  
+  // Use 'multi' for seamless language switching, fall back to specific language if needed
+  const useMultiLanguage = true; // Enable auto-detection for all sessions
+  const effectiveLanguage = useMultiLanguage ? 'multi' : language;
+  const timing = getDeepgramEndpointing(ageGroup);
+  
+  console.log("[Deepgram] 🎤 Starting stream with language:", effectiveLanguage, "(selected:", language, ") ageGroup:", ageGroup || 'default');
+  console.log("[Deepgram] ⏱️ Endpointing:", timing.endpointing, "ms, Utterance end:", timing.utterance_end_ms, "ms");
+  
+  try {
+    const deepgramClient = getDeepgramClient();
+    const connection = deepgramClient.listen.live({
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // MODEL & LANGUAGE SETTINGS - MULTI-LANGUAGE AUTO-DETECTION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    model: "nova-3",            // Nova-3: best accuracy, single-word detection, 45+ languages
+    language: effectiveLanguage, // 'multi' enables seamless language switching
+    smart_format: true,         // Auto-format numbers, dates, etc.
+    interim_results: true,      // Get real-time partial transcripts
+    punctuate: true,            // Add punctuation for better readability
+    profanity_filter: false,    // Don't filter any words
+    diarize: false,             // Single speaker optimization
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // AUDIO QUALITY & SENSITIVITY SETTINGS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    encoding: "linear16",
+    sample_rate: 16000,
+    channels: 1,                // Mono audio
+    multichannel: false,        // Single channel optimization
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // VAD & TIMING SETTINGS (Dec 11, 2025: OPTIMIZED FOR EDUCATIONAL TUTORING)
+    // Students need 2-3+ seconds to formulate complex thoughts without interruption
+    // Previous settings (2000/2500ms) still triggered AI mid-sentence during thinking pauses
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    endpointing: timing.endpointing,
+    utterance_end_ms: timing.utterance_end_ms,
+    vad_events: true,           // Enable voice activity detection events
+    vad_threshold: 0.15,        // VERY LOW threshold for quiet speech detection (was 0.3)
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // ACCURACY ENHANCEMENTS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    filler_words: true,         // Include "um", "uh" for natural speech
+    numerals: true,             // Convert spoken numbers to digits
+    });
+
+    console.log("[Deepgram] 📡 Connection object created");
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // KEEP-ALIVE MECHANISM (Dec 9, 2025 FIX)
+    // Deepgram disconnects after ~10-12 seconds of inactivity
+    // Send keepAlive every 8 seconds to prevent timeout (Deepgram recommends < 12s)
+    // NOTE: keepAlive only works AFTER first audio frame is sent
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // CONNECTION HEALTH CHECK (Dec 10, 2025 FIX - UPDATED)
+    // Detect stale connections that stop returning transcripts
+    // If no transcripts for 5 MINUTES after audio sent, connection is dead
+    // Previous 30s threshold was too aggressive for tutoring (students think!)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const STALE_CONNECTION_THRESHOLD_MS = 300000; // 5 minutes (was 30s - too aggressive)
+    const HEALTH_CHECK_INTERVAL_MS = 30000; // Check every 30s (was 10s)
+    const KEEPALIVE_INTERVAL_MS = 8000; // Send keepAlive every 8s (was 5s, Deepgram recommends < 12s)
+    let keepAliveInterval: NodeJS.Timeout | null = null;
+    let healthCheckInterval: NodeJS.Timeout | null = null;
+    let firstAudioSent = false;
+    let connectionReady = false;
+    let lastTranscriptTime: number = Date.now();
+    let lastAudioSentTime: number = Date.now(); // DIAGNOSTIC: Track when audio was last sent
+    let audioChunkCount: number = 0; // DIAGNOSTIC: Count audio chunks sent
+    let connectionDead = false;
+
+    connection.on(LiveTranscriptionEvents.Open, () => {
+      console.log("[Deepgram] ✅ Connection opened");
+      connectionReady = true;
+    });
+
+    connection.on(LiveTranscriptionEvents.Transcript, (data) => {
+      // HEALTH CHECK: Update last transcript time (tracks connection liveness)
+      lastTranscriptTime = Date.now();
+      
+      // Extract detected language from various possible locations in response
+      const detectedLanguage = (data as any).detected_language || 
+                               (data as any).channel?.detected_language ||
+                               (data as any).channel?.alternatives?.[0]?.languages?.[0] ||
+                               language; // Fall back to selected language
+      
+      console.log('[Deepgram] 📥 RAW TRANSCRIPT EVENT:', JSON.stringify({
+        has_channel: !!data.channel,
+        has_alternatives: !!data.channel?.alternatives,
+        alternatives_length: data.channel?.alternatives?.length || 0,
+        is_final: data.is_final,
+        type: data.type,
+        detected_language: detectedLanguage,
+        full_data_keys: Object.keys(data)
+      }, null, 2));
+      
+      const transcript = data.channel?.alternatives?.[0]?.transcript;
+      const isFinal = data.is_final;
+      const speechFinal = (data as any).speech_final || false;
+      
+      console.log('[Deepgram] 📝 Parsed transcript data:', {
+        text: transcript,
+        textLength: transcript?.length || 0,
+        isFinal: isFinal,
+        speechFinal: speechFinal,
+        hasText: !!transcript,
+        isEmpty: !transcript || transcript.trim().length === 0,
+        detectedLanguage: detectedLanguage
+      });
+      
+      if (transcript && transcript.length > 0) {
+        console.log(`[Deepgram] ✅ VALID TRANSCRIPT: ${speechFinal ? '🔚 SPEECH_FINAL' : isFinal ? '📝 FINAL' : '⏳ interim'}: "${transcript}" [lang: ${detectedLanguage}]`);
+        onTranscript(transcript, isFinal, speechFinal, detectedLanguage);
+      } else {
+        // Still notify for speech_final on empty transcripts (silence detected)
+        if (speechFinal) {
+          console.log('[Deepgram] 🔚 speech_final with empty transcript — signaling turn end');
+          onTranscript('', false, true, detectedLanguage);
+        } else {
+          console.log('[Deepgram] ⚠️ Empty or null transcript, skipping');
+        }
+      }
+    });
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // UTTERANCE END: Definitive "student is done" signal
+    // Fires after utterance_end_ms of no words detected
+    // This is the safety net — commit immediately
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    connection.on(LiveTranscriptionEvents.UtteranceEnd, () => {
+      console.log('[Deepgram] 🔚 UtteranceEnd event — definitive turn end');
+      if (onUtteranceEnd) onUtteranceEnd();
+    });
+
+    connection.on(LiveTranscriptionEvents.Error, (error) => {
+      console.error("[Deepgram] ❌ ERROR EVENT:", {
+        message: error?.message || String(error),
+        code: (error as any)?.code,
+        type: (error as any)?.type,
+        stack: error?.stack
+      });
+      onError(error);
+    });
+
+    // DIAGNOSTIC FIX (Dec 10, 2025): Capture close event with full metadata
+    connection.on(LiveTranscriptionEvents.Close, (event: any) => {
+      const sessionDurationSec = Math.round((Date.now() - lastTranscriptTime) / 1000);
+      const closeCode = event?.code || event?.closeCode || 'unknown';
+      const closeReason = event?.reason || event?.closeReason || 'unknown';
+      
+      console.error("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      const timeSinceAudio = Math.round((Date.now() - lastAudioSentTime) / 1000);
+      
+      console.error("[Deepgram] 🔌 CONNECTION CLOSED - DIAGNOSTIC INFO:");
+      console.error("[Deepgram] Close code:", closeCode);
+      console.error("[Deepgram] Close reason:", closeReason);
+      console.error("[Deepgram] Connection was ready:", connectionReady);
+      console.error("[Deepgram] Connection was dead:", connectionDead);
+      console.error("[Deepgram] First audio was sent:", firstAudioSent);
+      console.error("[Deepgram] Total audio chunks sent:", audioChunkCount);
+      console.error("[Deepgram] Time since last audio:", timeSinceAudio, "seconds");
+      console.error("[Deepgram] Time since last transcript:", sessionDurationSec, "seconds");
+      console.error("[Deepgram] Full close event:", JSON.stringify(event, null, 2));
+      console.error("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+      
+      // Clear all intervals on close
+      if (keepAliveInterval) {
+        clearInterval(keepAliveInterval);
+        keepAliveInterval = null;
+        console.log("[Deepgram] 💓 KeepAlive interval cleared");
+      }
+      
+      if (healthCheckInterval) {
+        clearInterval(healthCheckInterval);
+        healthCheckInterval = null;
+        console.log("[Deepgram] 💚 Health check interval cleared");
+      }
+      
+      if (onClose) {
+        onClose();
+      }
+    });
+
+    // Wait for connection to open
+    await new Promise((resolve) => {
+      connection.on(LiveTranscriptionEvents.Open, resolve);
+    });
+
+    // Helper function to start keepAlive interval
+    // CRITICAL FIX (Dec 10, 2025): Send proper KeepAlive JSON message
+    // Deepgram closes connections after 10-12 seconds without messages
+    // Must send {"type": "KeepAlive"} as TEXT message, not binary
+    const startKeepAliveInterval = () => {
+      if (keepAliveInterval) return; // Already running
+      
+      keepAliveInterval = setInterval(() => {
+        try {
+          if (!connectionReady || connectionDead) {
+            console.log("[Deepgram] ⏸️ KeepAlive skipped (connection not ready or dead)");
+            return;
+          }
+          
+          // Try SDK's keepAlive method first (preferred)
+          if ((connection as any).keepAlive) {
+            (connection as any).keepAlive();
+            console.log("[Deepgram] 💓 KeepAlive sent via SDK method");
+          } else {
+            // Fallback: Send KeepAlive as raw JSON text message
+            // This is what Deepgram expects: {"type": "KeepAlive"}
+            console.warn("[Deepgram] ⚠️ SDK keepAlive not available, sending raw JSON");
+            (connection as any).send(JSON.stringify({ type: "KeepAlive" }));
+            console.log("[Deepgram] 💓 KeepAlive sent via raw JSON");
+          }
+        } catch (err) {
+          console.error("[Deepgram] ❌ KeepAlive failed:", err);
+          // Connection might be dead - mark it
+          if (!connectionDead) {
+            console.warn("[Deepgram] ⚠️ KeepAlive failure suggests connection is dead");
+          }
+        }
+      }, KEEPALIVE_INTERVAL_MS);
+      
+      console.log(`[Deepgram] 💓 KeepAlive interval started (every ${KEEPALIVE_INTERVAL_MS / 1000}s)`);
+    };
+
+    // Helper function to start health check interval
+    const startHealthCheckInterval = () => {
+      if (healthCheckInterval) return; // Already running
+      
+      healthCheckInterval = setInterval(() => {
+        const timeSinceTranscript = Date.now() - lastTranscriptTime;
+        const timeSinceTranscriptSec = Math.round(timeSinceTranscript / 1000);
+        
+        // Log health status every check (less verbose when things are fine)
+        if (timeSinceTranscript < 60000) {
+          console.log(`[Deepgram] 💚 Health check: ${timeSinceTranscriptSec}s since last transcript - OK`);
+        } else {
+          console.log(`[Deepgram] 💛 Health check: ${timeSinceTranscriptSec}s since last transcript (student may be thinking)`);
+        }
+        
+        // Close after 5 MINUTES of complete silence (prevents overbilling)
+        if (timeSinceTranscript > STALE_CONNECTION_THRESHOLD_MS && firstAudioSent && !connectionDead) {
+          console.warn(`[Deepgram] ⚠️ STALE CONNECTION: No transcripts for ${timeSinceTranscriptSec}s (>${STALE_CONNECTION_THRESHOLD_MS / 1000}s threshold), closing connection`);
+          connectionDead = true;
+          connection.finish();
+        }
+      }, HEALTH_CHECK_INTERVAL_MS);
+      
+      console.log(`[Deepgram] 💚 Health check interval started (every ${HEALTH_CHECK_INTERVAL_MS / 1000}s, stale threshold: ${STALE_CONNECTION_THRESHOLD_MS / 1000}s)`);
+    };
+
+    const deepgramConnection: DeepgramConnection = {
+      send: (audioData: Buffer) => {
+        if (connection) {
+          connection.send(audioData);
+          
+          // DIAGNOSTIC: Track audio send timing
+          lastAudioSentTime = Date.now();
+          audioChunkCount++;
+          
+          // Log every 100 chunks to avoid spam but still track activity
+          if (audioChunkCount % 100 === 0) {
+            console.log(`[Deepgram] 🎤 Audio chunk #${audioChunkCount} sent (${audioData.length} bytes)`);
+          }
+          
+          // Start keepAlive and health check after first audio is sent (per Deepgram docs)
+          if (!firstAudioSent && connectionReady) {
+            firstAudioSent = true;
+            console.log("[Deepgram] 🎤 First audio sent - starting keepAlive and health check");
+            startKeepAliveInterval();
+            startHealthCheckInterval(); // HEALTH CHECK: Start monitoring for stale connections
+          }
+        }
+      },
+      close: () => {
+        // Clear all intervals
+        if (keepAliveInterval) {
+          clearInterval(keepAliveInterval);
+          keepAliveInterval = null;
+          console.log("[Deepgram] 💓 KeepAlive interval cleared on close()");
+        }
+        if (healthCheckInterval) {
+          clearInterval(healthCheckInterval);
+          healthCheckInterval = null;
+          console.log("[Deepgram] 💚 Health check interval cleared on close()");
+        }
+        connectionReady = false;
+        if (connection) {
+          connection.finish();
+        }
+      },
+      keepAliveInterval: keepAliveInterval || undefined,
+    };
+    
+    return deepgramConnection;
+    
+  } catch (error) {
+    console.error("[Deepgram] ❌ Error creating connection:", error);
+    throw error;
+  }
+}
