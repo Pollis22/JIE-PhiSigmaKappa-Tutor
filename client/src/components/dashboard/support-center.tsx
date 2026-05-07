@@ -44,7 +44,7 @@ const faqItems = [
       },
       {
         q: "What subjects are available?",
-        a: "We offer tutoring in Math, English, Science, Spanish, and General learning for all grade levels from K-2 through College/Adult."
+        a: "Coursework support across the humanities and sciences for college Brothers, plus graduate test preparation: GRE, GMAT, LSAT, MCAT. Voice tutoring is available in 25 languages."
       },
       {
         q: "How does the AI tutor adapt to my learning level?",

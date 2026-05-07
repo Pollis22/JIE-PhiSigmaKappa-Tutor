@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Star, Send, CheckCircle } from "lucide-react";
 
-const UW_RED = "#B71234";
+const PSK_CARDINAL = "#B71234";
+const PSK_CARDINAL_DARK = "#8B0E27";
 
 interface Props {
   sessionId?: string | null;
@@ -57,7 +58,7 @@ export function SessionFeedback({ sessionId, show }: Props) {
           {/* Header bar */}
           <div
             className="flex items-center gap-2 px-4 py-2.5"
-            style={{ background: `linear-gradient(90deg, ${UW_RED} 0%, #9B0000 100%)` }}
+            style={{ background: `linear-gradient(90deg, ${PSK_CARDINAL} 0%, #8B0E27 100%)` }}
           >
             <MessageSquare className="h-4 w-4 text-white/90" />
             <span className="text-white text-sm font-bold tracking-wide">
@@ -74,9 +75,9 @@ export function SessionFeedback({ sessionId, show }: Props) {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center gap-2 py-3 text-center"
                 >
-                  <CheckCircle className="h-8 w-8" style={{ color: UW_RED }} />
-                  <p className="font-bold text-sm" style={{ color: UW_RED }}>
-                    Thank you! 🦡
+                  <CheckCircle className="h-8 w-8" style={{ color: PSK_CARDINAL }} />
+                  <p className="font-bold text-sm" style={{ color: PSK_CARDINAL }}>
+                    Thank you, Brother.
                   </p>
                   <p className="text-xs text-gray-500">
                     Your feedback helps us improve the Phi Sigma Kappa Tutor experience.
@@ -99,8 +100,8 @@ export function SessionFeedback({ sessionId, show }: Props) {
                           <Star
                             className="h-8 w-8 transition-colors duration-150"
                             style={{
-                              fill:   star <= activeRating ? UW_RED : "transparent",
-                              color:  star <= activeRating ? UW_RED : "#d1d5db",
+                              fill:   star <= activeRating ? PSK_CARDINAL : "transparent",
+                              color:  star <= activeRating ? PSK_CARDINAL : "#d1d5db",
                               filter: star <= activeRating ? "drop-shadow(0 0 3px rgba(183,18,52,0.4))" : "none",
                             }}
                           />
@@ -110,7 +111,7 @@ export function SessionFeedback({ sessionId, show }: Props) {
                     {activeRating > 0 && (
                       <span
                         className="text-xs font-semibold transition-all duration-200"
-                        style={{ color: UW_RED }}
+                        style={{ color: PSK_CARDINAL }}
                       >
                         {LABELS[activeRating]}
                       </span>
@@ -131,7 +132,7 @@ export function SessionFeedback({ sessionId, show }: Props) {
                       color: "#333",
                       fontFamily: "inherit",
                     }}
-                    onFocus={(e) => (e.target.style.borderColor = UW_RED)}
+                    onFocus={(e) => (e.target.style.borderColor = PSK_CARDINAL)}
                     onBlur={(e) => (e.target.style.borderColor = "rgba(183,18,52,0.2)")}
                   />
                   {comment.length > 0 && (
@@ -141,7 +142,7 @@ export function SessionFeedback({ sessionId, show }: Props) {
                   )}
 
                   {error && (
-                    <p className="text-xs font-medium" style={{ color: UW_RED }}>
+                    <p className="text-xs font-medium" style={{ color: PSK_CARDINAL }}>
                       {error}
                     </p>
                   )}
@@ -151,7 +152,7 @@ export function SessionFeedback({ sessionId, show }: Props) {
                     onClick={handleSubmit}
                     disabled={submitting}
                     className="w-full flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-bold text-white transition-opacity disabled:opacity-60"
-                    style={{ background: `linear-gradient(90deg, ${UW_RED} 0%, #9B0000 100%)` }}
+                    style={{ background: `linear-gradient(90deg, ${PSK_CARDINAL} 0%, #8B0E27 100%)` }}
                   >
                     <Send className="h-4 w-4" />
                     {submitting ? "Submitting..." : "Submit Feedback"}

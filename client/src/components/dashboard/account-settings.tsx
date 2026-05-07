@@ -181,7 +181,7 @@ export default function AccountSettings() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `uw-tutor-data-${Date.now()}.json`;
+      a.download = `phisig-tutor-data-${Date.now()}.json`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);

@@ -13,8 +13,8 @@ const BORDER = "#E8E8E8";
 const CARDINAL_SOFT = "rgba(183,18,52,0.06)";
 const CARDINAL_BORDER = "rgba(183,18,52,0.20)";
 
-const FONT_DISPLAY = "'Red Hat Display', sans-serif";
-const FONT_BODY = "'Red Hat Text', 'Source Sans 3', sans-serif";
+const FONT_DISPLAY = "'Playfair Display', Georgia, serif";
+const FONT_BODY = "'Open Sans', system-ui, sans-serif";
 
 function Card({ children, style = {}, highlight = false }: { children: React.ReactNode; style?: React.CSSProperties; highlight?: boolean }) {
   return (
@@ -150,13 +150,13 @@ export default function AboutLSISPage() {
                 }}
               >
                 Most AI tutors are amnesiac.<br />
-                <span style={{ color: CARDINAL }}>JIE remembers every session.</span>
+                <span style={{ color: CARDINAL }}>The Cardinal Tutor remembers every session.</span>
               </h2>
               <p style={{ fontSize: 18, lineHeight: 1.65, color: MUTED }}>
-                LSIS is the engine that turns JIE from a voice-chat app into a true learning companion.
-                After every session, LSIS extracts what a student understood, what confused them, and what
+                LSIS is the engine that turns the Cardinal Tutor from a voice-chat app into a true learning companion.
+                After every session, LSIS extracts what a Brother understood, what confused him, and what
                 teaching style worked — then feeds that knowledge back into the next session. Session 20
-                is dramatically better than session 1 because the tutor has been learning about the student
+                is dramatically better than session 1 because the tutor has been learning about the Brother
                 the whole time. A competitor starting cold cannot catch up.
               </p>
             </div>
@@ -168,8 +168,8 @@ export default function AboutLSISPage() {
           <SectionTitle>Why This Changes Everything</SectionTitle>
           <SectionIntro>
             ChatGPT, Claude, Gemini, and every generic AI tutor start every conversation from zero. They are
-            brilliant strangers who meet your student for the first time, every time. LSIS is the difference
-            between a stranger and a tutor who knows your child.
+            brilliant strangers who meet a Brother for the first time, every time. LSIS is the difference
+            between a stranger and a tutor who knows the man across from him.
           </SectionIntro>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
@@ -201,15 +201,15 @@ export default function AboutLSISPage() {
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                 <CheckCircle style={{ width: 22, height: 22, color: CARDINAL }} />
                 <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 17, fontWeight: 700, color: DARK }}>
-                  JIE with LSIS
+                  The Cardinal Tutor with LSIS
                 </h3>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
                 {[
-                  'Opens with: "Last time we were working on fraction multiplication — ready to continue?"',
-                  "Remembers every concept the student has engaged with, scored 0–100% mastery",
+                  'Opens with: "Last time we were working through integration by parts — ready to continue?"',
+                  "Remembers every concept the Brother has engaged with, scored 0–100% mastery",
                   "Skips mastered material and zeros in on growth areas",
-                  "Knows the student learns faster with visual analogies than verbal explanations",
+                  "Knows the Brother learns faster with worked examples than verbal explanations",
                   "Catalogs misconceptions and revisits them until resolved",
                   "Session 20 is a completely different experience from session 1 — personalized, faster, deeper",
                 ].map((text, i) => (
@@ -351,7 +351,7 @@ export default function AboutLSISPage() {
 
           <Card highlight style={{ padding: 36 }}>
             <p style={{ fontSize: 15, color: MUTED, marginBottom: 24, fontStyle: "italic" }}>
-              Imagine Emma, a 4th grader working on fractions with JIE.
+              Imagine Brother Sam, a junior at Pi Chapter working through Calculus II.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 40 }}>
               <div>
@@ -362,12 +362,12 @@ export default function AboutLSISPage() {
                   </h3>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
-                  <p>Tutor: "Hi Emma! What would you like to work on today?"</p>
-                  <p>Emma: "Fractions, I guess."</p>
+                  <p>Tutor: "Hi Sam! What would you like to work on today?"</p>
+                  <p>Sam: "Integration, I guess."</p>
                   <p>
-                    Tutor delivers a standard 4th-grade fraction lesson. Emma engages politely but the pacing is
-                    generic. Tutor has no idea she already knows equivalent fractions cold but struggles specifically
-                    with unlike denominators. Session ends neutrally.
+                    Tutor delivers a standard integration techniques review. Sam engages politely but the pacing is
+                    generic. Tutor has no idea he already has u-substitution cold but struggles specifically
+                    with integration by parts on trigonometric products. Session ends neutrally.
                   </p>
                 </div>
               </div>
@@ -379,12 +379,12 @@ export default function AboutLSISPage() {
                   </h3>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: 14, color: DARK, lineHeight: 1.6 }}>
-                  <p>Tutor: "Hey Emma — last time we cracked unlike denominators with the pizza analogy. Want to try applying it to word problems today? I have a good one about a soccer team."</p>
-                  <p>Emma: "Yeah!"</p>
+                  <p>Tutor: "Hey Sam — last time we cracked integration by parts on the sin·cos products with the LIATE worked example. Want to try applying it to ∫x²·eˣ today? Your midterm hits that pattern hard."</p>
+                  <p>Sam: "Yeah, let's go."</p>
                   <p>
-                    Tutor opens with the student's preferred learning modality (visual/sports analogies), avoids
-                    already-mastered concepts (equivalent fractions), targets the known growth area, and references a
-                    teaching strategy that previously scored 0.9 effectiveness. Emma hits mastery 5 minutes into the
+                    Tutor opens with the Brother's preferred learning modality (worked examples over verbal proofs), avoids
+                    already-mastered concepts (u-substitution), targets the known growth area, and references a
+                    teaching strategy that previously scored 0.9 effectiveness. Sam hits mastery 5 minutes into the
                     session.
                   </p>
                 </div>
@@ -393,7 +393,7 @@ export default function AboutLSISPage() {
             <div style={{ marginTop: 28, paddingTop: 24, borderTop: `1px solid ${BORDER}` }}>
               <p style={{ fontSize: 15, color: DARK, lineHeight: 1.6 }}>
                 <strong style={{ color: CARDINAL }}>That compounding advantage is the moat.</strong> A competitor
-                starting a new student from session 1 cannot replicate 19 sessions of personal knowledge no matter
+                starting a new Brother from session 1 cannot replicate 19 sessions of personal knowledge no matter
                 how powerful their underlying LLM is.
               </p>
             </div>
@@ -402,7 +402,7 @@ export default function AboutLSISPage() {
 
         {/* Competitive Comparison */}
         <section style={{ marginBottom: 56 }}>
-          <SectionTitle>How JIE Compares</SectionTitle>
+          <SectionTitle>How the Cardinal Tutor Compares</SectionTitle>
           <SectionIntro>
             We're frequently asked "why not just use ChatGPT?" Here's the honest answer.
           </SectionIntro>
@@ -414,7 +414,7 @@ export default function AboutLSISPage() {
                   <th style={{ padding: 16, fontFamily: FONT_DISPLAY, fontWeight: 700, color: DARK }}>Feature</th>
                   <th style={{ padding: 16, fontFamily: FONT_DISPLAY, fontWeight: 700, color: MUTED }}>ChatGPT / Claude / Gemini</th>
                   <th style={{ padding: 16, fontFamily: FONT_DISPLAY, fontWeight: 700, color: MUTED }}>Khan / Duolingo</th>
-                  <th style={{ padding: 16, fontFamily: FONT_DISPLAY, fontWeight: 700, color: CARDINAL }}>JIE with LSIS</th>
+                  <th style={{ padding: 16, fontFamily: FONT_DISPLAY, fontWeight: 700, color: CARDINAL }}>The Cardinal Tutor with LSIS</th>
                 </tr>
               </thead>
               <tbody>
@@ -506,8 +506,8 @@ export default function AboutLSISPage() {
                 The tutor that gets smarter every week.
               </h2>
               <p style={{ fontSize: 16, color: MUTED, marginBottom: 28, lineHeight: 1.6 }}>
-                Every session with JIE teaches the tutor how to teach your student better. That compounding
-                advantage is unique to JIE and impossible to replicate with a generic AI.
+                Every session with the Cardinal Tutor teaches it how to teach a Brother better. That compounding
+                advantage is unique to this platform and impossible to replicate with a generic AI.
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <button

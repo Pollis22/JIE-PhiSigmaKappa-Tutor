@@ -21,16 +21,16 @@ export default function FeaturesAndBenefits() {
       {/* Global Navigation */}
       <NavigationHeader />
 
-      {/* Hero Section with Bascom Hall */}
+      {/* Hero Section */}
       <div className="relative h-[500px] overflow-hidden">
         <img 
           src="/bascom-hall.png" 
-          alt="Phi Sigma Kappa campus" 
+          alt="Phi Sigma Kappa" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#B71234]/80 via-[#B71234]/60 to-[#B71234]/90 flex items-center justify-center">
           <div className="text-center text-white px-4">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               Your 24/7 AI Study Partner
             </h1>
             <p className="text-xl md:text-2xl mb-8">
@@ -51,7 +51,7 @@ export default function FeaturesAndBenefits() {
         
         {/* Key Benefits Grid */}
         <div className="mb-20">
-          <h2 className="text-4xl font-bold text-[#B71234] text-center mb-12" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-[#B71234] text-center mb-12" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Why Students Choose Our Platform
           </h2>
           
@@ -108,7 +108,7 @@ export default function FeaturesAndBenefits() {
 
         {/* Powerful Features Section */}
         <div className="mb-20">
-          <h2 className="text-4xl font-bold text-[#B71234] text-center mb-12" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-[#B71234] text-center mb-12" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Powerful Features That Work the Way You Learn
           </h2>
 
@@ -193,7 +193,7 @@ export default function FeaturesAndBenefits() {
 
         {/* Mobile & Desktop */}
         <div className="bg-gray-50 rounded-lg p-8 mb-20">
-          <h2 className="text-3xl font-bold text-[#B71234] text-center mb-6" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] text-center mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Study On Any Device
           </h2>
           <p className="text-gray-700 text-lg text-center mb-6">

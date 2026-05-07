@@ -10,10 +10,10 @@ import studentLibrary from "@/assets/campus/student-library.png";
 import memorialUnion from "@/assets/campus/memorial-union.png";
 
 // Brand colors
-const UW_RED   = "#B71234";
-const UW_DARK  = "#9B0000";
-const UW_NAVY  = "#1e2a47";
-const UW_INK   = "#0a2240";
+const PSK_CARDINAL = "#B71234";
+const PSK_CARDINAL_DARK = "#8B0E27";
+const PSK_NAVY = "#1e2a47";
+const PSK_INK = "#0a2240";
 
 const STATS = [
   { value: "Academic SRM", label: "+ AI Tutor" },
@@ -45,56 +45,56 @@ export function HeroBanner({ mounted = false }: Props) {
       image:    studentLibrary,
       headline: "Your Academic Command Center",
       sub:      "Student Relationship Manager + AI Tutor, built for Phi Sigma Kappa Brothers",
-      accent:   UW_INK,
+      accent:   PSK_INK,
       position: "center 25%",
     },
     {
       image:    bascomHall,
       headline: "One System. Every Course. Every Deadline.",
       sub:      "Syllabus → calendar → study tasks → tutor — automatically",
-      accent:   UW_NAVY,
+      accent:   PSK_NAVY,
       position: "center 55%",
     },
     {
       image:    buckyGraduation,
       headline: "Stay Ahead, All the Way to the Podium",
       sub:      "Engagement scoring and early alerts keep you on track",
-      accent:   UW_DARK,
+      accent:   PSK_CARDINAL_DARK,
       position: "center 30%",
     },
     {
       image:    buckyClassroom,
       headline: "A Tutor That Knows Your Semester",
       sub:      "Every session opens already knowing what's due next",
-      accent:   UW_DARK,
+      accent:   PSK_CARDINAL_DARK,
       position: "center 35%",
     },
     {
       image:    buckyLecture,
       headline: "Learn at Your Own Pace",
       sub:      "Adaptive instruction across every course and subject",
-      accent:   UW_INK,
+      accent:   PSK_INK,
       position: "center 35%",
     },
     {
       image:    memorialUnion,
-      headline: "From Bascom to the Terrace",
+      headline: "From Lecture Hall to the House",
       sub:      "Study anywhere — voice, text, any device",
-      accent:   UW_NAVY,
+      accent:   PSK_NAVY,
       position: "center center",
     },
     {
       image:    buckyBasketball,
       headline: "Built for Student-Athletes",
       sub:      "Travel-ready tutoring with eligibility-protecting alerts",
-      accent:   UW_DARK,
+      accent:   PSK_CARDINAL_DARK,
       position: "center 25%",
     },
     {
       image:    buckyFootball,
       headline: "By These Things, I Stand.",
-      sub:      "Academic support built for Phi Sigma Kappa students",
-      accent:   UW_RED,
+      sub:      "Academic support built for the Brothers of Phi Sigma Kappa",
+      accent:   PSK_CARDINAL,
       position: "center 25%",
     },
   ];
@@ -191,7 +191,7 @@ export function HeroBanner({ mounted = false }: Props) {
       {/* ── Stats Strip ────────────────────────────────────── */}
       <div
         className="grid grid-cols-4 w-full"
-        style={{ background: `linear-gradient(90deg, ${UW_RED} 0%, ${UW_DARK} 100%)` }}
+        style={{ background: `linear-gradient(90deg, ${PSK_CARDINAL} 0%, ${PSK_CARDINAL_DARK} 100%)` }}
       >
         {STATS.map((stat, i) => (
           <div
@@ -212,9 +212,9 @@ export function HeroBanner({ mounted = false }: Props) {
       {/* ── Course Ticker ──────────────────────────────────── */}
       <div
         className="flex items-center gap-0 w-full overflow-hidden"
-        style={{ background: UW_NAVY, borderRadius: "0 0 16px 16px", padding: "7px 16px" }}
+        style={{ background: PSK_NAVY, borderRadius: "0 0 16px 16px", padding: "7px 16px" }}
       >
-        <span className="text-xs font-bold uppercase tracking-widest mr-3 shrink-0" style={{ color: UW_RED }}>
+        <span className="text-xs font-bold uppercase tracking-widest mr-3 shrink-0" style={{ color: PSK_CARDINAL }}>
           Courses
         </span>
         <div className="flex gap-2 overflow-hidden flex-1">
@@ -226,7 +226,7 @@ export function HeroBanner({ mounted = false }: Props) {
                 key={course}
                 className="text-xs font-semibold whitespace-nowrap transition-all duration-500 px-2 py-0.5 rounded-full shrink-0"
                 style={{
-                  background: isActive ? UW_RED : isNear ? "rgba(183,18,52,0.18)" : "transparent",
+                  background: isActive ? PSK_CARDINAL : isNear ? "rgba(183,18,52,0.18)" : "transparent",
                   color:      isActive ? "white" : isNear ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.32)",
                   transform:  isActive ? "scale(1.1)" : "scale(1)",
                 }}

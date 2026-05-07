@@ -23,7 +23,7 @@ function SRMStep({ number, title, desc, icon }: { number: number; title: string;
         <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ background: "rgba(183,18,52,0.06)" }}>
           {icon}
         </div>
-        <h3 style={{ fontFamily: "'Red Hat Display', sans-serif", fontWeight: 700, fontSize: 20, color: "#282728", marginBottom: 6 }}>{title}</h3>
+        <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 20, color: "#282728", marginBottom: 6 }}>{title}</h3>
         <p style={{ fontSize: 15, lineHeight: 1.65, color: "#646569", maxWidth: 480 }}>{desc}</p>
       </div>
     </div>
@@ -35,7 +35,7 @@ export default function SRMPage() {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen" style={{ background: "#FFFFFF", fontFamily: "'Red Hat Text', 'Source Sans 3', sans-serif" }}>
+    <div className="min-h-screen" style={{ background: "#FFFFFF", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
       <NavigationHeader />
 
       {/* Hero */}
@@ -52,7 +52,7 @@ export default function SRMPage() {
               <span style={{ fontSize: 13, fontWeight: 600, color: "#B71234" }}>Student Relationship Management</span>
             </div>
 
-            <h1 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 800, lineHeight: 1.08, color: "#282728", marginBottom: 20, letterSpacing: -1.5 }}>
+            <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 800, lineHeight: 1.08, color: "#282728", marginBottom: 20, letterSpacing: -1.5 }}>
               Your Academic<br />
               <span style={{ color: "#B71234" }}>Command Center</span>
             </h1>
@@ -89,7 +89,7 @@ export default function SRMPage() {
       <section className="py-16 md:py-20 px-4 md:px-12" style={{ background: "#FAFAFA" }}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, color: "#282728", lineHeight: 1.15, marginBottom: 8 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, color: "#282728", lineHeight: 1.15, marginBottom: 8 }}>
               Most Students Don't Fail Exams Because They're Not Smart
             </h2>
             <p style={{ fontSize: 17, color: "#646569", maxWidth: 640, margin: "0 auto", lineHeight: 1.6 }}>
@@ -156,7 +156,7 @@ export default function SRMPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4" style={{ background: "rgba(183,18,52,0.08)", border: "1px solid rgba(183,18,52,0.15)" }}>
               <span style={{ fontSize: 12, fontWeight: 600, color: "#B71234", textTransform: "uppercase", letterSpacing: 1 }}>How It Works</span>
             </div>
-            <h2 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, color: "#282728", lineHeight: 1.15 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, color: "#282728", lineHeight: 1.15 }}>
               From Syllabus to Study Plan in <span style={{ color: "#B71234" }}>60 Seconds</span>
             </h2>
           </div>
@@ -180,7 +180,7 @@ export default function SRMPage() {
       <section className="py-16 md:py-20 px-4 md:px-12" style={{ background: "#FAFAFA" }}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, color: "#282728", lineHeight: 1.15, marginBottom: 8 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, color: "#282728", lineHeight: 1.15, marginBottom: 8 }}>
               Everything You Need to <span style={{ color: "#B71234" }}>Stay Ahead</span>
             </h2>
           </div>
@@ -199,7 +199,7 @@ export default function SRMPage() {
             ].map((f, i) => (
               <div key={i} className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg" style={{ background: "#FFFFFF", border: "1px solid #E8E8E8" }}>
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(183,18,52,0.06)", color: "#B71234" }}>{f.icon}</div>
-                <h3 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: 17, fontWeight: 700, marginBottom: 6, color: "#282728" }}>{f.title}</h3>
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 17, fontWeight: 700, marginBottom: 6, color: "#282728" }}>{f.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.6, color: "#646569" }}>{f.desc}</p>
               </div>
             ))}
@@ -212,12 +212,12 @@ export default function SRMPage() {
         <div className="max-w-5xl mx-auto">
           <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #E8E8E8", boxShadow: "0 8px 40px rgba(0,0,0,0.06)" }}>
             <div className="p-2" style={{ background: "#B71234" }}>
-              <p className="text-center text-white font-bold" style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: 14, letterSpacing: 1, textTransform: "uppercase" }}>
+              <p className="text-center text-white font-bold" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 14, letterSpacing: 1, textTransform: "uppercase" }}>
                 What Makes This Different
               </p>
             </div>
             <div className="p-7 md:p-10" style={{ background: "linear-gradient(135deg, #FFF7ED 0%, #FFF 100%)" }}>
-              <h3 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(22px, 3vw, 30px)", fontWeight: 800, color: "#282728", marginBottom: 12 }}>
+              <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(22px, 3vw, 30px)", fontWeight: 800, color: "#282728", marginBottom: 12 }}>
                 Your Tutor Doesn't Just Know Your Subject.<br />
                 <span style={{ color: "#B71234" }}>It Knows Your Semester.</span>
               </h3>
@@ -263,7 +263,7 @@ export default function SRMPage() {
                   <Shield className="w-3.5 h-3.5" style={{ color: "#B71234" }} />
                   <span style={{ fontSize: 12, fontWeight: 600, color: "#B71234", textTransform: "uppercase", letterSpacing: 1 }}>For Student-Athletes</span>
                 </div>
-                <h3 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(22px, 3vw, 28px)", fontWeight: 800, color: "#282728", marginBottom: 12 }}>
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(22px, 3vw, 28px)", fontWeight: 800, color: "#282728", marginBottom: 12 }}>
                   Protect Your Eligibility.<br />Automatically.
                 </h3>
                 <p style={{ fontSize: 15, color: "#646569", lineHeight: 1.65, marginBottom: 20 }}>
@@ -310,7 +310,7 @@ export default function SRMPage() {
       {/* Engagement Score Breakdown */}
       <section className="py-16 md:py-20 px-4 md:px-12" style={{ background: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, color: "#282728", marginBottom: 8 }}>
+          <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, color: "#282728", marginBottom: 8 }}>
             Your Engagement Score, <span style={{ color: "#B71234" }}>Explained</span>
           </h2>
           <p style={{ fontSize: 16, color: "#646569", maxWidth: 500, margin: "0 auto 32px", lineHeight: 1.6 }}>
@@ -325,7 +325,7 @@ export default function SRMPage() {
               { label: "Consistency", weight: "10%", desc: "Activity on 4+ different days earns the full bonus", color: "#16A34A" },
             ].map((s, i) => (
               <div key={i} className="rounded-xl p-5" style={{ background: "#FAFAFA", border: "1px solid #E8E8E8" }}>
-                <div className="text-3xl font-bold mb-1" style={{ color: s.color, fontFamily: "'Red Hat Display', sans-serif" }}>{s.weight}</div>
+                <div className="text-3xl font-bold mb-1" style={{ color: s.color, fontFamily: "'Playfair Display', Georgia, serif" }}>{s.weight}</div>
                 <p style={{ fontSize: 14, fontWeight: 700, color: "#282728", marginBottom: 4 }}>{s.label}</p>
                 <p style={{ fontSize: 12, color: "#646569", lineHeight: 1.4 }}>{s.desc}</p>
               </div>
@@ -351,7 +351,7 @@ export default function SRMPage() {
       {/* CTA */}
       <section className="py-16 md:py-20 px-4 md:px-12" style={{ background: "#282728" }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 style={{ fontFamily: "'Red Hat Display', sans-serif", fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, color: "#FFFFFF", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, color: "#FFFFFF", marginBottom: 12 }}>
             Stop Reacting. Start <span style={{ color: "#FF6B6B" }}>Leading</span> Your Semester.
           </h2>
           <p style={{ fontSize: 16, color: "#A0A0A0", maxWidth: 480, margin: "0 auto 28px", lineHeight: 1.6 }}>

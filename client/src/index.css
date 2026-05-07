@@ -315,7 +315,7 @@ li[data-sonner-toast] * {
 
 /* ============================================================
    MOBILE RESPONSIVE GLOBAL — v1 (Apr 27, 2026)
-   Applies to all JIE platforms (Mastery / UW / State / USC / Mobile)
+   Applies platform-wide
    Marker: JIE_MOBILE_RESPONSIVE_V1
    Idempotent: deploy script checks for this marker before appending.
    ============================================================ */

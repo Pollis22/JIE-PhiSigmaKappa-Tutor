@@ -75,7 +75,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4" style={{ color: '#B71234', fontFamily: 'Red Hat Display, sans-serif' }}>
+            <h1 className="text-4xl font-bold mb-4" style={{ color: '#B71234', fontFamily: "'Playfair Display', Georgia, serif" }}>
               Contact Us
             </h1>
             <p className="text-xl text-gray-600">

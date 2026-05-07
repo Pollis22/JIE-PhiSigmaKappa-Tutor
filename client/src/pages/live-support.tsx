@@ -24,7 +24,7 @@ export default function LiveSupport() {
       <div className="bg-[#B71234] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <MessageCircle className="w-16 h-16 mx-auto mb-4" />
-          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             We're Here to Help
           </h1>
           <p className="text-xl">
@@ -39,7 +39,7 @@ export default function LiveSupport() {
         <section className="mb-16">
           <div className="bg-gradient-to-r from-[#B71234] to-[#A00409] text-white p-8 rounded-lg text-center mb-8">
             <MessageCircle className="w-16 h-16 mx-auto mb-4" />
-            <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+            <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
               Live Voice Support
             </h2>
             <p className="text-lg mb-8">
@@ -55,7 +55,7 @@ export default function LiveSupport() {
               <button
                 onClick={launchVoiceCall}
                 className="relative bg-white text-[#B71234] px-10 py-5 rounded-full text-xl font-bold inline-flex items-center gap-3 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50"
-                style={{ fontFamily: "'Red Hat Display', sans-serif" }}
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 data-testid="button-launch-voice-call"
                 aria-label="Start voice call with support"
               >
@@ -78,7 +78,7 @@ export default function LiveSupport() {
 
         {/* Common Questions */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Common Questions
           </h2>
 
@@ -157,7 +157,7 @@ export default function LiveSupport() {
 
         {/* Additional Resources */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Additional Resources
           </h2>
 

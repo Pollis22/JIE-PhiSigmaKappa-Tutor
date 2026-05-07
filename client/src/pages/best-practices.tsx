@@ -23,7 +23,7 @@ export default function BestPractices() {
       {/* Header */}
       <div className="bg-[#B71234] text-white py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Best Practices for Success
           </h1>
           <p className="text-xl">
@@ -36,7 +36,7 @@ export default function BestPractices() {
         
         {/* Optimal Environment */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Setting Up Your Study Environment
           </h2>
 
@@ -99,7 +99,7 @@ export default function BestPractices() {
 
         {/* Voice vs Text Mode */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Voice Mode vs. Text Mode
           </h2>
 
@@ -176,7 +176,7 @@ export default function BestPractices() {
 
         {/* Effective Communication */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Communicating Effectively with Your AI Tutor
           </h2>
 
@@ -249,7 +249,7 @@ export default function BestPractices() {
 
         {/* Study Strategies */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Study Strategies That Work
           </h2>
 
@@ -308,7 +308,7 @@ export default function BestPractices() {
 
         {/* Multilingual Support */}
         <section className="mb-16 bg-gradient-to-r from-[#B71234] to-[#A00409] text-white p-8 rounded-lg">
-          <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Learn in Your Preferred Language
           </h2>
           <p className="text-lg mb-4">
@@ -321,7 +321,7 @@ export default function BestPractices() {
 
         {/* Getting Help */}
         <section>
-          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: 'Red Hat Display, sans-serif' }}>
+          <h2 className="text-3xl font-bold text-[#B71234] mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             Need Additional Help?
           </h2>
           <div className="bg-gray-50 p-8 rounded-lg text-center">

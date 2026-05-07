@@ -125,7 +125,7 @@ export function LiveChatWidget() {
                 <Phone className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold" style={{ fontFamily: "'Red Hat Display', sans-serif" }}>Phi Sigma Kappa Tutor Support</h3>
+                <h3 className="font-semibold" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Phi Sigma Kappa Tutor Support</h3>
                 <p className="text-xs" style={{ color: 'rgba(255,255,255,0.9)' }}>
                   {conversation.status === 'connected' ? '● Live' : 'Connecting...'}
                 </p>

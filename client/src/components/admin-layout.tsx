@@ -53,7 +53,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               </button>
               <img src={suLogo} alt="Phi Sigma Kappa" style={{ height: 40 }} />
               <div>
-                <h1 className="text-xl font-bold" style={{ fontFamily: "'Red Hat Display', sans-serif" }}>Admin Dashboard</h1>
+                <h1 className="text-xl font-bold" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>Admin Dashboard</h1>
                 <p className="text-xs" style={{ color: "#999" }}>Phi Sigma Kappa Tutor</p>
               </div>
             </div>

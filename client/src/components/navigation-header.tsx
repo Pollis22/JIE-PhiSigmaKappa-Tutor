@@ -101,7 +101,7 @@ export function NavigationHeader() {
                   background: isActive(item.path) ? "rgba(183,18,52,0.06)" : "transparent",
                   border: "none",
                   cursor: "pointer",
-                  fontFamily: "'Red Hat Text', sans-serif",
+                  fontFamily: "'Open Sans', system-ui, sans-serif",
                   transition: "all 0.15s",
                   whiteSpace: "nowrap",
                 }}
@@ -172,7 +172,7 @@ export function NavigationHeader() {
                   background: isActive(item.path) ? "rgba(183,18,52,0.06)" : "transparent",
                   border: "none",
                   cursor: "pointer",
-                  fontFamily: "'Red Hat Text', sans-serif",
+                  fontFamily: "'Open Sans', system-ui, sans-serif",
                 }}
               >
                 {item.label}
@@ -193,7 +193,7 @@ export function NavigationHeader() {
                   background: "transparent",
                   border: "none",
                   cursor: "pointer",
-                  fontFamily: "'Red Hat Text', sans-serif",
+                  fontFamily: "'Open Sans', system-ui, sans-serif",
                 }}
               >
                 Sign Out
