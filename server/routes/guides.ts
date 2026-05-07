@@ -150,7 +150,7 @@ router.post('/add-to-library', async (req, res) => {
     // No expiration — study guides don't expire
     const document = await storage.uploadDocument(userId, {
       originalName: guideName,
-      fileName: `jie-guide-${guide.id}.txt`,
+      fileName: `phisig-guide-${guide.id}.txt`,
       filePath: `guides/${guide.id}`, // Virtual path — content is in DB, not on disk
       fileType: 'guide',
       fileSize: guide.contentText.length,

@@ -201,7 +201,7 @@ export class EmailService {
     try {
       const resend = getResendClient();
       const fromEmail = getFromEmail();
-      const adminEmail = process.env.ADMIN_EMAIL || 'support@stateuniversity-tutor.ai';
+      const adminEmail = process.env.ADMIN_EMAIL || 'support@phisig-tutor.ai';
       
       // Format amount as currency (treat 0 as valid, only N/A for undefined/null)
       const formattedAmount = typeof data.amount === 'number' ? `$${data.amount.toFixed(2)}` : 'N/A';
@@ -313,7 +313,7 @@ export class EmailService {
     try {
       const resend = getResendClient();
       const fromEmail = getFromEmail();
-      const adminEmail = process.env.ADMIN_EMAIL || 'support@stateuniversity-tutor.ai';
+      const adminEmail = process.env.ADMIN_EMAIL || 'support@phisig-tutor.ai';
       
       const { customerEmail, customerName, planName, amountPaid, invoiceNumber, invoiceUrl, renewalDate } = params;
       
@@ -454,7 +454,7 @@ export class EmailService {
       `;
       
       const text = `
-UNIVERSITY OF WISCONSIN AI TUTOR - SUBSCRIPTION RENEWED
+PHI SIGMA KAPPA TUTOR - SUBSCRIPTION RENEWED
 
 Recurring Revenue: +$${amountPaid.toFixed(2)}
 Plan: ${planName}
@@ -742,7 +742,7 @@ The Phi Sigma Kappa Tutor Team`;
 <p style="word-break: break-all; color: #666; font-size: 14px;"><a href="${resetUrl}" target="_blank" style="color: #dc2626;">${resetUrl}</a></p>
 <p style="color: #666; font-size: 14px; margin-top: 30px;">This password reset link will expire in 1 hour. If you didn't request a password reset, you can safely ignore this email.</p>
 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-<p style="color: #999; font-size: 12px;">Phi Sigma Kappa Tutor<br><a href="https://stateuniversity-tutor.ai" target="_blank" style="color: #dc2626;">stateuniversity-tutor.ai</a></p>
+<p style="color: #999; font-size: 12px;">Phi Sigma Kappa Tutor<br><a href="https://phisig-tutor.ai" target="_blank" style="color: #dc2626;">phisig-tutor.ai</a></p>
 </body>
 </html>`;
 
@@ -758,7 +758,7 @@ ${resetUrl}
 This password reset link will expire in 1 hour. If you didn't request a password reset, you can safely ignore this email.
 
 Phi Sigma Kappa Tutor
-stateuniversity-tutor.ai
+phisig-tutor.ai
       `;
 
       await resend.emails.send({
@@ -784,7 +784,7 @@ stateuniversity-tutor.ai
     try {
       const resend = getResendClient();
       const fromEmail = getFromEmail();
-      const adminEmail = process.env.ADMIN_EMAIL || 'support@stateuniversity-tutor.ai';
+      const adminEmail = process.env.ADMIN_EMAIL || 'support@phisig-tutor.ai';
       
       // Send to admin
       await resend.emails.send({
@@ -836,7 +836,7 @@ stateuniversity-tutor.ai
   // ==========================================
 
   private getAdminEmail(): string {
-    return process.env.ADMIN_EMAIL || 'support@stateuniversity-tutor.ai';
+    return process.env.ADMIN_EMAIL || 'support@phisig-tutor.ai';
   }
 
   // Customer Cancellation Email

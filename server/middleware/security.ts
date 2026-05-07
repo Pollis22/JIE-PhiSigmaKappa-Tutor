@@ -23,8 +23,8 @@ export function setupCORS(req: Request, res: Response, next: NextFunction) {
   const allowedOrigins = [
     'http://localhost:5000',
     'http://localhost:3000',
-    'https://www.stateuniversity-tutor.ai',
-    'https://stateuniversity-tutor.ai',
+    'https://www.phisig-tutor.ai',
+    'https://phisig-tutor.ai',
     'https://jie-mastery-tutor-v2-production.up.railway.app',
     'https://jie-mobile-tutor-app-production.up.railway.app',
     process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : '',

@@ -135,9 +135,9 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">6. Contact Us</h2>
               <p>If you have questions or wish to exercise your privacy rights, please contact us at:</p>
               <p className="mt-4 space-y-2">
-                📧 <a href="mailto:support@stateuniversity-tutor.ai" className="text-primary hover:underline">support@stateuniversity-tutor.ai</a>
+                📧 <a href="mailto:support@phisig-tutor.ai" className="text-primary hover:underline">support@phisig-tutor.ai</a>
                 <br />
-                🌐 <a href="https://stateuniversity-tutor.ai/privacy" className="text-primary hover:underline">https://stateuniversity-tutor.ai/privacy</a>
+                🌐 <a href="https://phisig-tutor.ai/privacy" className="text-primary hover:underline">https://phisig-tutor.ai/privacy</a>
               </p>
             </section>
 

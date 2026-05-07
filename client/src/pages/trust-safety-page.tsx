@@ -172,7 +172,7 @@ export default function TrustSafetyPage() {
             <h2 className="text-2xl font-bold mb-4">How to Contact Us About Privacy & Security</h2>
             <p className="mb-4">If you have questions about privacy, security, or compliance—or if you're a school district or business needing our documentation—contact:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Email:</strong> support@stateuniversity-tutor.ai</li>
+              <li><strong>Email:</strong> support@phisig-tutor.ai</li>
               <li><strong>Mailing address:</strong> 2863 W. 95th Street, Suite 123-129, Naperville, IL 60564</li>
               <li><strong>Subject line suggestion:</strong> "Attn: Security & Privacy – Phi Sigma Kappa Tutor"</li>
             </ul>

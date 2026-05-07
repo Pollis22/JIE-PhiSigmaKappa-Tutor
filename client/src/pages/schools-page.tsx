@@ -536,17 +536,17 @@ export default function SchoolsPage() {
 
             <div className="pt-8 border-t border-border mt-8">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-muted-foreground">
-                <a href="https://stateuniversity-tutor.ai" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <a href="https://phisig-tutor.ai" className="flex items-center gap-2 hover:text-foreground transition-colors">
                   <Globe className="w-5 h-5" />
-                  stateuniversity-tutor.ai
+                  phisig-tutor.ai
                 </a>
                 <a href="tel:+18008640367" className="flex items-center gap-2 hover:text-foreground transition-colors">
                   <Phone className="w-5 h-5" />
                   1-800-864-0367
                 </a>
-                <a href="mailto:sales@stateuniversity-tutor.ai" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <a href="mailto:sales@phisig-tutor.ai" className="flex items-center gap-2 hover:text-foreground transition-colors">
                   <Mail className="w-5 h-5" />
-                  sales@stateuniversity-tutor.ai
+                  sales@phisig-tutor.ai
                 </a>
               </div>
             </div>

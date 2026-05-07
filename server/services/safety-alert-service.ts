@@ -84,7 +84,7 @@ export async function logSafetyIncident(data: SafetyAlertData): Promise<void> {
 }
 
 export async function sendAdminSafetyAlert(data: SafetyAlertData): Promise<boolean> {
-  const adminEmail = process.env.ADMIN_ALERT_EMAIL || 'pollis@stateuniversity-tutor.ai';
+  const adminEmail = process.env.ADMIN_ALERT_EMAIL || 'pollis@phisig-tutor.ai';
   
   if (!ADMIN_ALERT_TRIGGERS.includes(data.flagType)) {
     return false;
@@ -177,7 +177,7 @@ Session ID: ${data.sessionId.slice(0, 8)}...
 
 You can review the full transcript by logging into your Phi Sigma Kappa Tutor account.
 
-If you have concerns, please contact us at support@stateuniversity-tutor.ai.
+If you have concerns, please contact us at support@phisig-tutor.ai.
 
 Best regards,
 Phi Sigma Kappa Tutor Team
@@ -248,7 +248,7 @@ function getParentFriendlyDescription(flagType: string): string {
  * This sends an internal notification for all safety-related session terminations
  */
 export async function sendJIESupportNotification(data: SafetyIncidentNotification): Promise<boolean> {
-  const jieSuportEmail = process.env.JIE_SUPPORT_EMAIL || process.env.ADMIN_EMAIL || 'pollis@stateuniversity-tutor.ai';
+  const jieSuportEmail = process.env.JIE_SUPPORT_EMAIL || process.env.ADMIN_EMAIL || 'pollis@phisig-tutor.ai';
   
   // Only notify for actual safety incidents
   if (!SAFETY_INCIDENT_TYPES.includes(data.incidentType)) {
@@ -282,7 +282,7 @@ export async function sendJIESupportNotification(data: SafetyIncidentNotificatio
   
   const body = `
 ${'='.repeat(60)}
-UNIVERSITY OF WISCONSIN AI TUTOR SAFETY INCIDENT REPORT
+PHI SIGMA KAPPA TUTOR SAFETY INCIDENT REPORT
 ${'='.repeat(60)}
 
 INCIDENT TYPE: ${incidentLabel}

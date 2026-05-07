@@ -100,7 +100,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">6. Cancellation and Refunds</h2>
             <h3 className="text-xl font-semibold mb-2">6.1 Cancellation by User</h3>
-            <p>You may cancel your subscription at any time through your account settings or by contacting customer support at info@stateuniversity-tutor.ai. Cancellation takes effect at the end of your current billing period. You will retain access to your remaining minutes until that date.</p>
+            <p>You may cancel your subscription at any time through your account settings or by contacting customer support at info@phisig-tutor.ai. Cancellation takes effect at the end of your current billing period. You will retain access to your remaining minutes until that date.</p>
             
             <h3 className="text-xl font-semibold mb-2 mt-4">6.2 No Refunds for Partial Months</h3>
             <p>We do not provide refunds for partial subscription periods. If you cancel mid-cycle, you will not be charged for subsequent periods, but no refund will be issued for the current period.</p>
@@ -225,7 +225,7 @@ export default function TermsPage() {
             
             <h3 className="text-xl font-semibold mb-2 mt-4">16.4 Contact Information</h3>
             <p>For questions about these Terms, contact us at:<br />
-            Email: info@stateuniversity-tutor.ai</p>
+            Email: info@phisig-tutor.ai</p>
           </section>
 
           <section className="mb-8">
@@ -373,7 +373,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">11. Contact Us</h2>
             <p>For privacy questions or to exercise your rights:<br />
-            Email: info@stateuniversity-tutor.ai</p>
+            Email: info@phisig-tutor.ai</p>
             <p className="mt-4 text-muted-foreground">Last Updated: October 3, 2025</p>
           </section>
         </div>

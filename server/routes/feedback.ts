@@ -98,7 +98,7 @@ router.post('/api/feedback', async (req: any, res) => {
     try {
       const { emailService } = await import('../services/email-service');
       await emailService.sendEmail({
-        to: 'pollis@stateuniversity-tutor.ai',
+        to: 'pollis@phisig-tutor.ai',
         subject: `[Feedback] ${categoryLabels[category]} — Phi Sigma Kappa Tutor`,
         html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
           <div style="background:#B71234;padding:20px 24px;border-radius:12px 12px 0 0;">
@@ -115,7 +115,7 @@ router.post('/api/feedback', async (req: any, res) => {
             <p style="margin:16px 0 0;font-size:11px;color:#9ca3af;text-align:center;">Phi Sigma Kappa Tutor • Feedback Widget</p>
           </div>
         </div>`,
-        text: `UNIVERSITY OF WISCONSIN TUTOR FEEDBACK\nCategory: ${categoryLabels[category]}\nRating: ${ratingDisplay}\n${userInfo}\nTime: ${now}\n\nMessage:\n${message}`,
+        text: `PHI SIGMA KAPPA TUTOR FEEDBACK\nCategory: ${categoryLabels[category]}\nRating: ${ratingDisplay}\n${userInfo}\nTime: ${now}\n\nMessage:\n${message}`,
       });
     } catch (emailErr: any) {
       console.error('[Feedback Widget] Email failed:', emailErr.message);

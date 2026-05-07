@@ -339,7 +339,7 @@ router.post('/reset-password', async (req: Request, res: Response) => {
             <h2 style="color: #16a34a;">Password Changed Successfully</h2>
             <p>Hi ${user.firstName || 'there'},</p>
             <p>Your password was successfully reset.</p>
-            <p>If you did not make this change, please contact us immediately at support@stateuniversity-tutor.ai</p>
+            <p>If you did not make this change, please contact us immediately at support@phisig-tutor.ai</p>
             <p style="margin-top: 30px; color: #666;">The Phi Sigma Kappa Tutor Team</p>
           </div>
         `,
@@ -435,11 +435,11 @@ router.post('/user/change-email', async (req: Request, res: Response) => {
             <p>Hi ${user.firstName || 'there'},</p>
             <p>Your Phi Sigma Kappa Tutor account email was just changed from <strong>${oldEmail}</strong> to <strong>${normalizedEmail}</strong>.</p>
             <p>If you made this change, no action is needed.</p>
-            <p><strong>If you did NOT make this change</strong>, please contact us immediately at support@stateuniversity-tutor.ai</p>
+            <p><strong>If you did NOT make this change</strong>, please contact us immediately at support@phisig-tutor.ai</p>
             <p style="margin-top: 30px; color: #666;">The Phi Sigma Kappa Tutor Team</p>
           </div>
         `,
-        text: `Your email was changed from ${oldEmail} to ${normalizedEmail}. If you didn't do this, contact support@stateuniversity-tutor.ai immediately.`
+        text: `Your email was changed from ${oldEmail} to ${normalizedEmail}. If you didn't do this, contact support@phisig-tutor.ai immediately.`
       });
     } catch (emailError) {
       console.error('[Account] Failed to send email change notification:', emailError);
@@ -474,14 +474,14 @@ router.post('/forgot-email', async (req: Request, res: Response) => {
     if (users.length === 0) {
       return res.json({
         success: false,
-        message: 'No account found with that name. Please contact support@stateuniversity-tutor.ai for help.'
+        message: 'No account found with that name. Please contact support@phisig-tutor.ai for help.'
       });
     }
 
     if (users.length > 1) {
       return res.json({
         success: false,
-        message: 'Multiple accounts found. Please contact support@stateuniversity-tutor.ai for help.'
+        message: 'Multiple accounts found. Please contact support@phisig-tutor.ai for help.'
       });
     }
 

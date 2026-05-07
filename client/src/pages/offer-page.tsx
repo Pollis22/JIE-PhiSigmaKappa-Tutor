@@ -51,7 +51,7 @@ export default function OfferPage() {
 
       const canonical = document.createElement('link');
       canonical.rel = 'canonical';
-      canonical.href = 'https://www.stateuniversity-tutor.ai/offer';
+      canonical.href = 'https://www.phisig-tutor.ai/offer';
       document.head.appendChild(canonical);
       elementsToCleanup.push(canonical);
     }
